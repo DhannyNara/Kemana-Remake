@@ -69,7 +69,7 @@ Once the backend is ready, you can deploy it.
 
 1.  **Open Project:** Open the `kemana/android` directory in Android Studio.
 2.  **Configure API Keys:** Update the backend and RabbitMQ URLs in `android/base/src/main/java/com/utsman/kemana/base/KEY.kt`.
-3.  **Build & Run:** Run the `driver` and `passenger` applications on an emulator or a physical device.
+3.  **Build & Run:** Run the `driver`, 'merchant', 'admin' and `passenger` applications on an emulator or a physical device.
 
 ---
 
