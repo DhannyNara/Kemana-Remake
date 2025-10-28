@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemana - Beranda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="manifest.webmanifest">
+    <style>
+        body { font-family: sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <main class="max-w-md mx-auto bg-white min-h-screen">
+        <!-- Header -->
+        <header class="p-4 flex justify-between items-center border-b">
+            <div>
+                <p class="text-sm text-gray-500">Selamat datang,</p>
+                <h1 class="text-xl font-bold">Pengguna Kemana</h1>
+            </div>
+            <div class="w-12 h-12 bg-gray-300 rounded-full">
+                <!-- Placeholder for profile picture -->
+            </div>
+        </header>
+
+        <!-- Saldo & Poin -->
+        <section class="p-4">
+            <div class="bg-indigo-600 text-white p-4 rounded-lg flex justify-between items-center">
+                <div>
+                    <p class="text-sm">Saldo Anda</p>
+                    <p class="text-2xl font-bold">Rp 125,500</p>
+                </div>
+                <button class="bg-white text-indigo-600 font-semibold px-4 py-2 rounded-md text-sm">Top Up</button>
+            </div>
+        </section>
+
+        <!-- Menu Layanan -->
+        <section class="p-4">
+            <h2 class="text-lg font-semibold mb-4 text-gray-800">Mau pakai layanan apa hari ini?</h2>
+            <div class="grid grid-cols-3 gap-4 text-center">
+                
+                <!-- Ride -->
+                <a href="ride.html" class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    <div class="w-16 h-16 bg-indigo-500 rounded-lg flex items-center justify-center mb-2">
+                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    </div>
+                    <span class="font-medium text-gray-700">Ride</span>
+                </a>
+
+                <!-- Food -->
+                <a href="#" class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    <div class="w-16 h-16 bg-orange-500 rounded-lg flex items-center justify-center mb-2">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3V3z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8"/></svg>
+                    </div>
+                    <span class="font-medium text-gray-700">Food</span>
+                </a>
+
+                <!-- Mart -->
+                <a href="#" class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center mb-2">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <span class="font-medium text-gray-700">Mart</span>
+                </a>
+
+                <!-- Kilat -->
+                <a href="#" class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    <div class="w-16 h-16 bg-blue-500 rounded-lg flex items-center justify-center mb-2">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17H6v-2l7-5V3l5 4-5 4v-2z"></path></svg>
+                    </div>
+                    <span class="font-medium text-gray-700">Kilat</span>
+                </a>
+
+                <!-- Jastip -->
+                <a href="#" class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    <div class="w-16 h-16 bg-teal-500 rounded-lg flex items-center justify-center mb-2">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    </div>
+                    <span class="font-medium text-gray-700">Jastip</span>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Promo & Berita -->
+        <section class="p-4">
+             <h2 class="text-lg font-semibold mb-4 text-gray-800">Promo & Berita</h2>
+             <div class="space-y-3">
+                <div class="bg-gray-200 h-28 rounded-lg p-4 flex items-end bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+                    <h3 class="text-white font-bold text-lg" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">Diskon 50% Naik Ojek!</h3>
+                </div>
+                <div class="bg-gray-200 h-28 rounded-lg p-4 flex items-end bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+                     <h3 class="text-white font-bold text-lg" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">Pesan Makan Gratis Ongkir</h3>
+                </div>
+             </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

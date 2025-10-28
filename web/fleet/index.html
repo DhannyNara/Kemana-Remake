@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemana - Fleet Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="manifest.webmanifest">
+    <style>
+        body { font-family: sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <h1 class="text-2xl font-bold text-gray-800">Kemana Fleet</h1>
+                <div class="flex items-center space-x-4">
+                    <span class="font-medium">Fleet Manager</span>
+                    <button class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Kartu Statistik -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-sm font-medium text-gray-500">Total Vehicles</p>
+                <p class="text-3xl font-bold">215</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-sm font-medium text-gray-500">Vehicles Active</p>
+                <p class="text-3xl font-bold">180</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-sm font-medium text-gray-500">In Maintenance</p>
+                <p class="text-3xl font-bold">12</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-sm font-medium text-gray-500">Alerts</p>
+                <p class="text-3xl font-bold text-red-500">3</p>
+            </div>
+        </div>
+
+        <!-- Tabel Kendaraan -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Vehicle Status</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">License Plate</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned Driver</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Location</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Contoh Data Kendaraan -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">B 1234 ABC</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Agus Setiawan</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap">Jl. Thamrin, Jakarta</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Track</a> | 
+                                <a href="#" class="text-yellow-600 hover:text-yellow-900">Maintenance</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">D 5678 XYZ</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Budi Hartono</td>
+                             <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Maintenance</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap">N/A</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Details</a>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">F 9101 QWE</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Citra Lestari</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span></td>
+                             <td class="px-6 py-4 whitespace-nowrap">Jl. Gatot Subroto, Bandung</td>
+                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Track</a> | 
+                                <a href="#" class="text-yellow-600 hover:text-yellow-900">Maintenance</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Registrasi Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
+</body>
+</html>

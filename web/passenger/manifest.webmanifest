@@ -1,0 +1,21 @@
+{
+  "name": "Kemana (Penumpang)",
+  "short_name": "Kemana",
+  "start_url": "/passenger/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4F46E5",
+  "description": "Aplikasi ojek online untuk penumpang.",
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

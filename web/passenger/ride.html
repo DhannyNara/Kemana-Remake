@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemana - Pesan Ojek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        .bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; background-color: white; border-top-left-radius: 1rem; border-top-right-radius: 1rem; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease-out; }
+        #search-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: white; z-index: 1000; transform: translateY(100%); transition: transform 0.3s ease-in-out; }
+        #search-modal.visible { transform: translateY(0); }
+        .mapboxgl-marker.destination-marker .mapboxgl-marker-pin {
+            background-color: #F43F5E; /* rose-500 */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <div class="bottom-sheet" id="bottom-sheet">
+        <div class="p-4 space-y-3">
+            <div id="container-from" class="p-2 rounded-lg border-b border-gray-200">
+                <p class="text-xs text-gray-500">From</p>
+                <p id="text-from" class="text-lg font-medium text-gray-800 truncate">Mencari lokasi Anda...</p>
+            </div>
+            <div id="container-to" class="cursor-pointer hover:bg-gray-50 p-2 rounded-lg">
+                <p class="text-xs text-gray-500">To</p>
+                <p id="text-to" class="text-lg font-medium text-gray-400">Mau kemana hari ini?</p>
+            </div>
+            <div id="detail-pricing-container" class="hidden space-y-2 pt-3 border-t">
+                <div class="flex justify-between items-center text-lg">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span id="text-distance" class="font-bold">0 km</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span id="text-price" class="font-bold">Rp 0</span>
+                    </div>
+                </div>
+            </div>
+            <button id="btn-order" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 disabled:bg-gray-400" disabled>Pesan Sekarang</button>
+        </div>
+    </div>
+
+    <div id="search-modal">
+        <div class="p-4 flex flex-col h-full">
+            <div class="flex items-center mb-4">
+                <button id="close-search-btn" class="mr-2 p-2 rounded-full hover:bg-gray-100"><svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                <input type="text" id="search-input" placeholder="Cari lokasi tujuan..." class="w-full text-lg p-2 border-b-2 border-gray-300 focus:border-indigo-500 outline-none">
+            </div>
+            <div id="search-results" class="overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <script>
+        const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoidXRzbWFuLWRldiIsImEiOiJjanZ6aXkwd2QwZXBvNGFwZGF0N2s2YjJ4In0.nE1a_PN3JpM2i908lBnoDA';
+        mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
+
+        const textFrom = document.getElementById('text-from');
+        const textTo = document.getElementById('text-to');
+        const mapContainer = document.getElementById('map');
+        const bottomSheet = document.getElementById('bottom-sheet');
+        const containerTo = document.getElementById('container-to');
+        const searchModal = document.getElementById('search-modal');
+        const closeSearchBtn = document.getElementById('close-search-btn');
+        const searchInput = document.getElementById('search-input');
+        const searchResultsContainer = document.getElementById('search-results');
+        const pricingContainer = document.getElementById('detail-pricing-container');
+        const textDistance = document.getElementById('text-distance');
+        const textPrice = document.getElementById('text-price');
+        const btnOrder = document.getElementById('btn-order');
+
+        let currentLngLat = null;
+        let destinationLngLat = null;
+        let startMarker = null;
+        let destinationMarker = null;
+        let debounceTimer;
+
+        const map = new mapboxgl.Map({ container: mapContainer, style: 'mapbox://styles/mapbox/streets-v11', center: [106.8456, -6.2088], zoom: 12 });
+
+        function adjustMapPadding() { map.setPadding({ bottom: bottomSheet.offsetHeight }); }
+        async function reverseGeocode(lngLat) { /* ... same as before ... */ return (await (await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lngLat.lng},${lngLat.lat}.json?access_token=${MAPBOX_ACCESS_TOKEN}`)).json()).features[0].place_name; }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const { longitude, latitude } = position.coords;
+                    currentLngLat = new mapboxgl.LngLat(longitude, latitude);
+                    map.setCenter(currentLngLat).setZoom(15);
+                    if (startMarker) startMarker.remove();
+                    startMarker = new mapboxgl.Marker({ color: '#4F46E5' }).setLngLat(currentLngLat).addTo(map);
+                    textFrom.textContent = await reverseGeocode(currentLngLat);
+                    adjustMapPadding();
+                }, () => { /* ... error handling ... */ }, { enableHighAccuracy: true });
+            }
+        });
+        
+        containerTo.addEventListener('click', () => { searchModal.classList.add('visible'); searchInput.focus(); });
+        closeSearchBtn.addEventListener('click', () => { searchModal.classList.remove('visible'); });
+
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            const query = e.target.value;
+            debounceTimer = setTimeout(async () => {
+                if (query.length > 2) {
+                    let proximity = currentLngLat ? `&proximity=${currentLngLat.lng},${currentLngLat.lat}` : '';
+                    const data = await (await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&country=ID${proximity}`)).json();
+                    displaySearchResults(data.features);
+                }
+            }, 500);
+        });
+
+        function displaySearchResults(features) {
+            searchResultsContainer.innerHTML = '';
+            if (!features) return;
+            features.forEach(feature => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50';
+                resultDiv.innerHTML = `<p class="font-semibold">${feature.text}</p><p class="text-sm text-gray-600">${feature.place_name}</p>`;
+                resultDiv.addEventListener('click', () => onSearchResultClick(feature));
+                searchResultsContainer.appendChild(resultDiv);
+            });
+        }
+
+        async function onSearchResultClick(feature) {
+            const [lng, lat] = feature.center;
+            destinationLngLat = new mapboxgl.LngLat(lng, lat);
+            textTo.textContent = feature.place_name;
+            textTo.classList.remove('text-gray-400');
+            searchModal.classList.remove('visible');
+            
+            if (destinationMarker) destinationMarker.remove();
+            destinationMarker = new mapboxgl.Marker({ className: 'destination-marker' }).setLngLat(destinationLngLat).addTo(map);
+
+            await getRoute(currentLngLat, destinationLngLat);
+        }
+
+        // --- Logic Perutean & Harga ---
+        async function getRoute(start, end) {
+            const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}?geometries=geojson&access_token=${MAPBOX_ACCESS_TOKEN}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            const route = data.routes[0].geometry.coordinates;
+            const geojson = { type: 'Feature', geometry: { type: 'LineString', coordinates: route } };
+
+            if (map.getSource('route')) {
+                map.getSource('route').setData(geojson);
+            } else {
+                map.addLayer({ id: 'route', type: 'line', source: { type: 'geojson', data: geojson }, layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#3887be', 'line-width': 5, 'line-opacity': 0.75 } });
+            }
+            
+            const bounds = new mapboxgl.LngLatBounds();
+            bounds.extend(start);
+            bounds.extend(end);
+            map.fitBounds(bounds, { padding: {top: 50, bottom: bottomSheet.offsetHeight + 20, left: 50, right: 50} });
+
+            updatePriceAndDistance(data.routes[0]);
+        }
+
+        function updatePriceAndDistance(route) {
+            const distanceKm = (route.distance / 1000).toFixed(1);
+            // Formula harga dari kode asli: Rp 2.500 per km
+            const price = Math.max(10000, Math.ceil(distanceKm * 2500)); 
+            
+            textDistance.textContent = `${distanceKm} km`;
+            textPrice.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(price)}`;
+            
+            pricingContainer.classList.remove('hidden');
+            btnOrder.disabled = false;
+        }
+
+        window.addEventListener('resize', adjustMapPadding);
+    </script>
+
+</body>
+</html>

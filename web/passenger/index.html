@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemana - Login Penumpang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="/passenger/manifest.webmanifest">
+    <meta name="theme-color" content="#4F46E5">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">Kemana</h1>
+        <p class="text-lg text-gray-600 mb-8">Login sebagai Penumpang</p>
+
+        <!-- Tombol Google Sign-In yang ditiru -->
+        <button id="google-signin-btn" class="bg-white border border-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-50 flex items-center justify-center">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" class="w-6 h-6 mr-3">
+            Masuk dengan Google
+        </button>
+    </div>
+
+    <script>
+        // Registrasi Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/passenger/sw.js')
+                    .then(reg => console.log('Service worker terdaftar:', reg))
+                    .catch(err => console.log('Registrasi service worker gagal:', err));
+            });
+        }
+
+        // Logika untuk tombol sign-in
+        document.getElementById('google-signin-btn').addEventListener('click', () => {
+            // Untuk saat ini, kita langsung arahkan ke beranda baru.
+            // Di aplikasi nyata, ini akan terjadi setelah otentikasi berhasil.
+            window.location.href = 'main.html';
+        });
+    </script>
+
+</body>
+</html>

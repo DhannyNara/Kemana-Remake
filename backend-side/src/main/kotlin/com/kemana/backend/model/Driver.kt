@@ -1,28 +1,32 @@
+
 package com.kemana.backend.model
 
+import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document(collection = "driver_active")
-open class Driver(var id: String? = null,
-                  val name: String,
-                  val email: String,
-                  val photoUrl: String,
-                  var position: Position? = null,
-                  var attribute: Attribute? = null)
+// Enum untuk status driver
+enum class DriverStatus {
+    OFFLINE,    // Tidak aktif atau tidak bekerja
+    AVAILABLE,  // Online dan siap menerima pekerjaan
+    ON_JOB      // Sedang mengerjakan sebuah pekerjaan
+}
 
-@Document(collection = "driver_db")
-open class DriverEntity(
+@Document(collection = "drivers") // Menggunakan satu koleksi "drivers"
+data class Driver(
+        @Id
         var id: String? = null,
         val name: String,
-        val email: String,
-        val photoUrl: String,
-        var position: Position? = null,
-        var attribute: Attribute? = null
+        val email: String, // Sebaiknya unik
+        val photoUrl: String?,
+
+        // Properti yang akan sering diupdate
+        var currentPosition: Position? = null, // Menggunakan Position dari model/Position.kt
+        var status: DriverStatus = DriverStatus.OFFLINE,
+        
+        // Atribut yang jarang berubah
+        val vehicleType: String, // Misal: "MOTOR", "MOBIL"
+        val vehiclePlate: String,
+        
+        // Informasi sensitif (sebaiknya dienkripsi)
+        var balance: Double = 0.0
 )
-
-data class Position(var lat: Double? = 0.0,
-                    var lon: Double? = 0.0,
-                    var angle: Double? = 0.0)
-
-data class Attribute(var vehiclesType: String? = "",
-                     var vehiclesPlat: String? = "")
