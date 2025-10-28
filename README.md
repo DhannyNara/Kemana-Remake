@@ -50,7 +50,7 @@ Before starting backend development, ensure your MongoDB and RabbitMQ servers ar
 
 This development environment is optimized for rapid iteration using AI tools.
 
-1.  **Open Project:** Open the `source/kemana/backend-side` directory in Google AI Studio.
+1.  **Open Project:** Open the `kemana/backend-side` directory in Google AI Studio.
 2.  **Analyze & Modify:** Use Gemini to analyze the code, perform refactoring, add new endpoints, or fix bugs.
 3.  **Run & Debug:** Use the integrated terminal to run the Spring Boot application. The standard command is `./mvnw spring-boot:run`.
 4.  **Iterate:** Repeat the process of modifying and testing until the desired feature is complete.
@@ -67,7 +67,7 @@ Once the backend is ready, you can deploy it.
 
 ### 4. Android Client
 
-1.  **Open Project:** Open the `source/kemana/android` directory in Android Studio.
+1.  **Open Project:** Open the `kemana/android` directory in Android Studio.
 2.  **Configure API Keys:** Update the backend and RabbitMQ URLs in `android/base/src/main/java/com/utsman/kemana/base/KEY.kt`.
 3.  **Build & Run:** Run the `driver` and `passenger` applications on an emulator or a physical device.
 
