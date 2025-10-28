@@ -1,165 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2019 Muhammad Utsman
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Order masuk!"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_name_passenger"
-        android:text="@string/app_name"/>
-
+    <!-- Header Jenis Pekerjaan -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="12dp"
-        android:id="@+id/detail_pricing_container">
+        android:gravity="center_vertical"
+        android:layout_marginBottom="12dp">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/icon_job_type"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_direction" 
+            app:tint="@color/mapbox_navigation_route_layer_blue"/>
+
+        <TextView
+            android:id="@+id/text_job_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="left|center"
-            tools:ignore="RtlHardcoded">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/ic_offer_price"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:layout_margin="12dp"
-                android:id="@+id/text_price"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="left|center"
-            tools:ignore="RtlHardcoded">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/ic_direction"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:layout_margin="12dp"
-                android:id="@+id/text_distance"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
+            android:text="Tawaran Perjalanan"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/container_from"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="From"
-            android:textSize="12sp"/>
-
-        <TextView
-            android:id="@+id/text_from"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:ellipsize="end"
-            android:maxLines="1"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/container_to"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To"
-            android:textSize="12sp"/>
-
-        <TextView
-            android:id="@+id/text_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Kemana?"
-            android:ellipsize="end"
-            android:maxLines="1"/>
-
-    </LinearLayout>
-
+    <!-- Detail Keuangan & Jarak -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="12dp">
+        android:layout_marginBottom="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_accept"
+        <!-- Pendapatan -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="6dp"
-            android:theme="@style/Widget.MaterialComponents.Button"
             android:layout_height="wrap_content"
-            android:text="Accept" />
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_offer_price"/>
+            <TextView
+                android:id="@+id/text_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 25,000"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Jarak -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_direction"/>
+            <TextView
+                android:id="@+id/text_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.2 km"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Detail Lokasi -->
+    <TextView
+        android:id="@+id/label_pickup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lokasi Jemput"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/text_from"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jl. Jenderal Sudirman No.Kav. 52-53, Senayan, Kebayoran Baru"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/label_destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lokasi Antar"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/text_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jl. Gatot Subroto No.Kav. 27, Kuningan, Setiabudi"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <!-- Detail Pesanan (untuk Food/Mart) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_order_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="#ECEFF1"
+        app:cardCornerRadius="8dp"
+        android:visibility="visible" 
+        tools:visibility="visible"> 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detail Pesanan (Food)"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/text_order_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="- 2x Nasi Goreng Spesial\n- 1x Es Teh Manis"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Tombol Aksi -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_reject"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_marginStart="6dp"
-            android:theme="@style/Widget.MaterialComponents.Button"
+            android:layout_marginEnd="8dp"
+            app:strokeColor="@android:color/holo_red_dark"
+            app:strokeWidth="1dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/holo_red_dark"
             android:layout_height="wrap_content"
-            android:text="Reject" />
+            android:text="Tolak" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_accept"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/mapbox_navigation_route_layer_blue"
+            android:layout_height="wrap_content"
+            android:text="Terima" />
 
     </LinearLayout>
 
