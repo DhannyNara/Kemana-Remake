@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Driver App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="logo.png" alt="Kemana Logo" class="logo">
+            <h1>Selamat Datang Kembali</h1>
+            <p>Masuk untuk melanjutkan sebagai mitra kemana</p>
+        </div>
+
+        <div class="login-form">
+            <!-- User/Pass Login Form -->
+            <div class="form-group">
+                <label for="userid">User ID</label>
+                <input type="text" id="userid" name="userid" placeholder="Masukkan User ID Anda">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan Password Anda">
+            </div>
+            <button id="email-login-btn" class="email-login-btn">Masuk</button>
+
+            <div class="separator">atau masuk dengan</div>
+
+            <!-- Google Login Button -->
+            <button id="google-login-btn" class="google-btn">
+                <img src="google-logo.png" alt="Google icon"> 
+                <span>Login dengan Google</span>
+            </button>
+        </div>
+
+        <div class="login-footer">
+            <p>Dengan masuk, Anda menyetujui <a href="#">Ketentuan Layanan</a> dan <a href="#">Kebijakan Privasi</a> kami.</p>
+        </div>
+    </div>
+
+    <!-- Declaration Popup -->
+    <div id="declaration-popup" class="declaration-popup">
+        <div class="popup-content">
+            <button id="close-popup-btn" class="close-popup-btn">&times;</button>
+            <img src="driver-icon.png" alt="Driver Icon">
+            <h2>Deklarasi Mitra Pengemudi</h2>
+            <ul>
+                <li>Saya akan mematuhi peraturan lalu lintas.</li>
+                <li>Saya akan memberikan pelayanan terbaik.</li>
+                <li>Saya akan menjaga kebersihan kendaraan.</li>
+                <li>Saya akan selalu jujur dan amanah.</li>
+            </ul>
+            <button id="start-declaration-btn">Mulai Deklarasi</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

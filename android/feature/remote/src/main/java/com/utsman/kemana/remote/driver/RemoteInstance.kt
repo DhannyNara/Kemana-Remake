@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2019 Muhammad Utsman
  *
@@ -16,103 +17,31 @@
 
 package com.utsman.kemana.remote.driver
 
-import com.utsman.kemana.base.REMOTE_URL
-import io.reactivex.Flowable
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
-import java.util.concurrent.TimeUnit
+import retrofit2.http.Body
+import retrofit2.http.POST
 
-interface RemoteInstance {
+// Definisikan ApiService interface di sini
+interface ApiService {
+    @POST("/api/db/driver/login")
+    suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
+}
 
-    @POST("/api/v1/driver/")
-    fun insertDriver(@Body driver: Driver): Flowable<Responses>
+object RemoteInstance {
 
-    @GET("/api/v1/driver/active")
-    fun getAllDriver(): Flowable<Responses>
+    private const val BASE_URL = "http://192.168.1.10:8080/"
 
-    @GET("/api/v1/driver/active/email")
-    fun getAllDriverEmail(): Flowable<ResponsesEmail>
+    private fun retrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
-    @GET("/api/v1/driver/{id}")
-    fun getDriver(@Path("id") id: String): Flowable<Responses>
-
-    @DELETE("/api/v1/driver/{id}")
-    fun deleteDriver(@Path("id") id: String): Flowable<Responses>
-
-    @DELETE("/api/v1/driver")
-    fun deleteDriverByEmail(
-        @Query("email") email: String
-    ): Flowable<Responses>
-
-    @PUT("/api/v1/driver/{id}")
-    fun editDriver(
-        @Path("id") id: String,
-        @Body position: Position
-    ): Flowable<Responses>
-
-    @PUT("/api/v1/driver")
-    fun editDriverByEmail(
-        @Query("email") email: String,
-        @Body position: Position
-    ): Flowable<Responses>
-
-
-    // registered
-    @POST("/api/v1/driver_db/")
-    fun registerDriver(@Body driver: Driver): Flowable<Responses>
-
-    @GET("/api/v1/driver_db/{id}")
-    fun getRegisteredDriver(@Path("id") id: String?): Flowable<Responses>
-
-    @GET("/api/v1/driver_db")
-    fun getRegisteredDriverByEmail(@Query("email") email: String?): Flowable<Responses>
-
-    @GET("/api/v1/driver_db/attr/{id}")
-    fun getAttrRegisteredDriver(
-        @Path("id") id: String?
-    ): Flowable<ResponsesAttribute>
-
-    @GET("/api/v1/driver_db/check/{email}")
-    fun checkRegisteredDriver(
-        @Path("email") email: String?
-    ): Flowable<ResponsesChecking>
-
-    @PUT("/api/v1/driver_db/edit/{email}")
-    fun editDriverRegisteredByEmail(
-        @Path("email") email: String?,
-        @Body position: Position?
-    ): Flowable<Responses>
-
-
-    // order
-    @GET("/api/v1/order/save")
-    fun saveOrder(@Body orderData: OrderData)
-
-    companion object {
-
-        fun create(): RemoteInstance {
-            val logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BODY
-
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .callTimeout(10000, TimeUnit.MILLISECONDS)
-                .connectTimeout(10000, TimeUnit.MILLISECONDS)
-                .build()
-
-            val retrofit = Retrofit.Builder()
-                .baseUrl(REMOTE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(client)
-                .build()
-
-            return retrofit.create(RemoteInstance::class.java)
-        }
-
+    // Buat public property untuk ApiService
+    val api: ApiService by lazy {
+        retrofit().create(ApiService::class.java)
     }
 }

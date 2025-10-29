@@ -1,0 +1,200 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KilatOrderActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Instant & Scheduled Tabs -->
+        <RadioGroup
+            android:id="@+id/radio_group_order_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/radio_button_instant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/radio_button_selector"
+                android:text="Instant"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radio_button_scheduled"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/radio_button_selector"
+                android:text="Dijadwalkan"/>
+        </RadioGroup>
+
+        <!-- Vehicle Type Selection -->
+        <HorizontalScrollView
+            android:id="@+id/scroll_view_vehicle_types"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/radio_group_order_type"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/linear_layout_vehicle_types"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Vehicle options will be added dynamically -->
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Pickup Address -->
+        <TextView
+            android:id="@+id/text_view_pickup_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat Penjemputan"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/scroll_view_vehicle_types"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_text_pickup_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Alamat"
+            app:layout_constraintTop_toBottomOf="@id/text_view_pickup_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_text_pickup_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Nomor HP"
+            android:inputType="phone"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_pickup_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- ... other pickup fields ... -->
+
+        <!-- Destination Address -->
+        <TextView
+            android:id="@+id/text_view_destination_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat Pengantaran"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_pickup_phone"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_text_destination_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Alamat"
+            app:layout_constraintTop_toBottomOf="@id/text_view_destination_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        
+        <EditText
+            android:id="@+id/edit_text_destination_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Nomor HP"
+            android:inputType="phone"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_destination_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- ... other destination fields ... -->
+
+        <!-- Package Details -->
+        <TextView
+            android:id="@+id/text_view_package_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail Paket"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_destination_phone"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <Spinner
+            android:id="@+id/spinner_package_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_view_package_title"/>
+        
+        <EditText
+            android:id="@+id/edit_text_package_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Apa yang Anda kirim?"
+            app:layout_constraintTop_toBottomOf="@id/spinner_package_weight"/>
+
+        <!-- Additional Options -->
+        <Switch
+            android:id="@+id/switch_motorbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Memerlukan Motorbox"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_package_description"/>
+
+        <Switch
+            android:id="@+id/switch_sms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kirim SMS ke penerima"
+            app:layout_constraintTop_toBottomOf="@id/switch_motorbox"/>
+
+        <!-- Payment -->
+        <TextView
+            android:id="@+id/text_view_payment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pembayaran"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/switch_sms"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_text_promo_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Kode diskon"
+            app:layout_constraintTop_toBottomOf="@id/text_view_payment_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_apply_promo"/>
+        
+        <Button
+            android:id="@+id/button_apply_promo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gunakan"
+            app:layout_constraintTop_toTopOf="@id/edit_text_promo_code"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Create Order Button -->
+        <Button
+            android:id="@+id/button_create_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buat Pesanan"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/button_apply_promo"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

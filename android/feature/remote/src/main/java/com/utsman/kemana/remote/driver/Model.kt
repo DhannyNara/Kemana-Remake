@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2019 Muhammad Utsman
  *
@@ -22,24 +23,39 @@ import com.utsman.kemana.remote.place.Places
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+// Login-specific data classes
+data class LoginRequest(
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("password")
+    val password: String
+)
+
+// Menggunakan kembali Driver model dari backend
 @Parcelize
-open class Driver(
+data class Driver(
+    @SerializedName("id")
     var id: String? = null,
-    val name: String?,
-    val email: String?,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("email")
+    val email: String, 
+    @SerializedName("password")
+    val password: String? = null, // Sebaiknya tidak diekspos ke UI
+    @SerializedName("photoUrl")
     val photoUrl: String?,
-    var position: Position? = null,
-    var attribute: Attribute? = null
+    @SerializedName("currentPosition")
+    var currentPosition: Position? = null,
+    @SerializedName("status")
+    var status: String? = "OFFLINE", // Sesuaikan dengan enum di backend
+    @SerializedName("vehicleType")
+    val vehicleType: String, 
+    @SerializedName("vehiclePlate")
+    val vehiclePlate: String,
+    @SerializedName("balance")
+    var balance: Double = 0.0
 ) : Parcelable
 
-@Parcelize
-data class Passenger(
-    var id: String? = null,
-    val name: String?,
-    val email: String?,
-    val photoUrl: String?,
-    var position: Position? = null
-) : Parcelable
 
 @Parcelize
 data class Position(
@@ -52,6 +68,27 @@ data class Position(
 data class Attribute(
     var vehiclesType: String? = "passenger",
     var vehiclesPlat: String? = "passenger"
+) : Parcelable
+
+// Generic Response untuk Login
+data class LoginResponse(
+    @SerializedName("status")
+    val status: String,
+    @SerializedName("payload")
+    val payload: List<Driver>?,
+    @SerializedName("message")
+    val message: String? // Tambahkan message untuk error handling
+)
+
+
+// Model-model lain yang sudah ada
+@Parcelize
+data class Passenger(
+    var id: String? = null,
+    val name: String?,
+    val email: String?,
+    val photoUrl: String?,
+    var position: Position? = null
 ) : Parcelable
 
 data class Responses(

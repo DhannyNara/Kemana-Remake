@@ -1,0 +1,206 @@
+
+/* --- Existing styles from before --- */
+body, html {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color, #f4f4f4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-header .logo {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.login-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.login-header p {
+    color: var(--text-secondary-color, #666);
+    margin-bottom: 25px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #aaa;
+    margin: 25px 0;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.google-btn:hover {
+    background-color: #357ae8;
+}
+
+.google-btn img {
+    width: 20px;
+    margin-right: 10px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.login-footer {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #888;
+}
+
+.login-footer a {
+    color: var(--primary-color, #007bff);
+    text-decoration: none;
+}
+
+/* --- New Styles for User/Pass Form --- */
+.login-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Important */
+}
+
+.email-login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color, #e74c3c);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.email-login-btn:hover {
+    background-color: var(--dark-primary-color, #c0392b);
+}
+
+
+/* --- Popup Styles --- */
+.declaration-popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.popup-content img {
+    width: 50px; margin-bottom: 15px; 
+}
+
+.popup-content h2 {
+    margin-top: 0;
+}
+
+.popup-content ul {
+    text-align: left;
+    list-style-position: inside;
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+
+#start-declaration-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    background-color: var(--primary-color, #e74c3c);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-popup-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+

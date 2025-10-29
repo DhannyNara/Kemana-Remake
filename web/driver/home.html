@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Driver App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+    <header class="home-header">
+        <div class="driver-info">
+            <h3>Mitra Pengemudi</h3>
+            <div class="driver-stats">
+                <span>&#9733; 5.00</span>
+                <span>|</span>
+                <span>100.0%</span>
+            </div>
+        </div>
+        <div class="autobid-toggle">
+            <span>Auto-Bid</span>
+            <label class="switch">
+                <input type="checkbox" id="autobid-checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </header>
+
+    <div class="tabs" id="tabs-container">
+        <!-- Tabs will be dynamically inserted here by JS -->
+    </div>
+
+    <main id="main-content" class="main-content">
+        <!-- Tab Content will be dynamically inserted here -->
+    </main>
+
+    <footer class="action-footer" id="action-footer">
+        <div class="slide-container" id="slide-container">
+            <div class="slide-rail">
+                <div class="slide-handle" id="slide-handle">&gt;</div>
+                <span class="slide-text">Mulai Bekerja</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- New Order Notification Popup -->
+    <div class="order-popup-overlay" id="order-popup-overlay">
+        <div class="order-popup">
+            <button class="close-popup-btn" id="close-order-popup">&times;</button>
+            <div class="order-popup-content">
+                <p class="income-label">Pendapatan bersih</p>
+                <h2 class="income-amount">Rp 4.950</h2>
+                <span class="payment-method">Tunai</span>
+                <div class="divider"></div>
+                <p class="service-name">GrabBike Hemat</p>
+                <p class="distance">6.62 km dari anda</p>
+                <div class="route-info">
+                    <div class="route-point">
+                        <span class="icon pickup-icon"></span>
+                        <p><strong>Near 57, Jalan S Parman</strong><br>Jl. S Parman 57, Palangka, Jekan Raya...</p>
+                    </div>
+                    <div class="route-point">
+                        <span class="icon dropoff-icon"></span>
+                        <p><strong>Tugu Soekarno</strong><br>Jl. S. Parman, Langkai, Pahandut...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="order-popup-actions">
+                 <!-- Manual Accept Button -->
+                <button class="accept-btn-manual" id="manual-accept-btn">
+                    <span>Terima Rp4.950</span>
+                    <span class="timer" id="manual-timer">21</span>
+                </button>
+                <!-- Auto Accept Button -->
+                <button class="accept-btn-auto" id="auto-accept-btn">
+                    <div class="progress-bar" id="auto-progress-bar"></div>
+                    <span>Menerima...</span>
+                </button>
+                <button class="cancel-btn-auto" id="auto-cancel-btn">Batalkan</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Auto-Accepted Confirmation -->
+    <div class="order-popup-overlay" id="auto-accepted-confirm-overlay">
+        <div class="order-popup centered">
+             <div class="order-popup-content">
+                <img src="checkmark-icon.png" class="checkmark-icon" alt="Success">
+                <h2>Booking auto-accepted!</h2>
+                <div class="route-info">
+                     <div class="route-point">
+                        <p><strong>Near 57, Jalan S Parman</strong></p>
+                    </div>
+                    <div class="route-point">
+                        <p><strong>Tugu Soekarno</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="order-popup-actions-confirm">
+                <button class.="cancel-btn-confirm" id="final-cancel-btn">Cancel</button>
+                <button class="continue-btn-confirm" id="final-continue-btn">Continue</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="firebase-config.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>

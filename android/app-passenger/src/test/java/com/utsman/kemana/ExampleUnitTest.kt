@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.utsman.kemana
+package com.ojol.kemana
 
 import org.junit.Test
 

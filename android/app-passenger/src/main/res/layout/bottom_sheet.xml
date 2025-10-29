@@ -25,7 +25,7 @@
     android:padding="6dp"
     app:cardElevation="5dp"
     app:cardCornerRadius="0dp"
-    app:layout_behavior="com.utsman.kemana.base.view.BottomSheetUnDrag">
+    app:layout_behavior="com.ojol.kemana.base.view.BottomSheetUnDrag">
 
     <FrameLayout
         android:layout_width="match_parent"

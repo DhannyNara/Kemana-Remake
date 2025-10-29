@@ -1,0 +1,31 @@
+
+# Panduan Mode Demo & Debug Aplikasi Kemana
+
+Dokumen ini menjelaskan cara mengakses dan memahami fungsionalitas "Mode Demo" dan "Mode Debug Offline" pada ekosistem aplikasi Kemana.
+
+---
+
+## 1. Mode Demo (Online dengan Fallback Offline)
+
+Mode ini dirancang untuk demonstrasi fleksibel. Secara default, ia akan mencoba terhubung ke server untuk pengalaman online yang otentik.
+
+- **User ID:** `000001`
+- **Password:** `demo`
+
+**Cara Kerja:**
+1.  **Percobaan Online:** Saat login, aplikasi akan mencoba menghubungkan ke backend untuk mengambil data pengguna "Demo" yang sebenarnya.
+2.  **Fallback Offline:** JIKA koneksi ke server GAGAL (misalnya, tidak ada internet), aplikasi tidak akan error. Sebaliknya, ia akan secara otomatis masuk menggunakan **data demo offline tiruan**, memungkinkan demo aplikasi tetap berjalan.
+
+**Catatan Developer:** Akun online `000001` dibuat secara otomatis oleh backend (`BackendApplication.kt`).
+
+---
+
+## 2. Mode Debug (Murni Offline)
+
+Mode ini adalah **fitur tersembunyi** yang selalu 100% offline dan dirancang untuk pengujian cepat UI dan logika internal aplikasi tanpa memerlukan koneksi internet/backend.
+
+- **User ID:** `debug`
+- **Password:** `debug`
+- **Aksi:** Tekan tombol "Masuk" sebanyak 5 kali secara berurutan.
+
+Setelah 5 kali klik, aplikasi akan langsung mengarahkan Anda ke halaman utama dengan data pengguna tiruan (mock data) tanpa melakukan panggilan jaringan sama sekali.

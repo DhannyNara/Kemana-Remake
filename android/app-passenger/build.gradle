@@ -20,7 +20,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
 ext {
-    appId = "com.utsman.kemana"
+    appId = "com.ojol.kemana"
 }
 
 dependencies {
